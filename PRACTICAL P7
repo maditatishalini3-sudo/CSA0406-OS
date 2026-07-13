@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main()
+{
+    int memory[5]={100,200,300,400,500};
+
+    printf("Memory Blocks:\n");
+
+    for(int i=0;i<5;i++)
+        printf("%d KB\n",memory[i]);
+
+    return 0;
+}
