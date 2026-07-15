@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+int main()
+{
+    if (fork() == 0)
+    {
+        printf("Child Process\n");
+        exit(0);
+    }
+    else
+    {
+        wait(NULL);
+        printf("Parent Process\n");
+        printf("Child completed.\n");
+    }
+    return 0;
+}
