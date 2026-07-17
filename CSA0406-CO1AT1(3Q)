@@ -1,0 +1,10 @@
+Start
+Open source file
+Open destination file
+While data is available
+    Read data from source file
+    Write data to destination file
+End While
+Close source file
+Close destination file
+Stop
