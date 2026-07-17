@@ -1,0 +1,8 @@
+Start
+Call fork()
+If child process
+    Call exec()
+Else
+    Call wait()
+End If
+Stop
