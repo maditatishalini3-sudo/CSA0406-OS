@@ -1,0 +1,8 @@
+Start
+Call fork()
+If child process
+    Display Child PID
+Else
+    Display Parent PID
+End If
+Stop
