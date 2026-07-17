@@ -1,6 +1,12 @@
-QUESTION 1
+M.NAGA SHALINI(192524183)
 
-Start
+ANSWER 1
+
+A) Multi-User Operating System
+Reason: Allows multiple students to use the Linux server at the same time.
+B) Process Management
+Memory Management
+C) Start
 Call fork()
 If child process
     Display Child PID
@@ -9,17 +15,27 @@ Else
 End If
 Stop
 
-QUESTION 2
-
-Start
+ANSWER 2
+A)open() – Create/Open file
+write() – Write data
+read() – Read data
+close() – Close file
+B)open() – Opens or creates a file.
+write() – Writes data into the file.
+C)Start
 Open "student.txt" (Create if not exists)
 Write "Student Name"
 Close file
 Stop
 
-QUESTION 3
-
-Start
+ANSWER 3
+A)open()
+read()
+write()
+close()
+B)read() – Reads data from the source file.
+write() – Writes data to the destination file.
+C)Start
 Open source file
 Open destination file
 While data is available
@@ -30,9 +46,11 @@ Close source file
 Close destination file
 Stop
 
-QUESTION 4
-
-Start
+ANSWER 4
+A)fork() – Creates a child process.
+exec() – Replaces the child process with a new program.
+B)wait() – Makes the parent process wait until the child process finishes.
+C)Start
 Call fork()
 If child process
     Call exec()
@@ -41,9 +59,13 @@ Else
 End If
 Stop
 
-QUESTION 5
-
-Start
+ANSWER 5
+A)Stores files safely.
+Organizes files for easy access.
+Manages reading and writing of files.
+B)open() – Opens a file for reading or writing.
+close() – Closes the file after use.
+C)Start
 Open file
 While data is available
     Read data from file
