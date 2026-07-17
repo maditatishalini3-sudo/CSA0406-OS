@@ -1,0 +1,52 @@
+QUESTION 1
+
+Start
+Call fork()
+If child process
+    Display Child PID
+Else
+    Display Parent PID
+End If
+Stop
+
+QUESTION 2
+
+Start
+Open "student.txt" (Create if not exists)
+Write "Student Name"
+Close file
+Stop
+
+QUESTION 3
+
+Start
+Open source file
+Open destination file
+While data is available
+    Read data from source file
+    Write data to destination file
+End While
+Close source file
+Close destination file
+Stop
+
+QUESTION 4
+
+Start
+Call fork()
+If child process
+    Call exec()
+Else
+    Call wait()
+End If
+Stop
+
+QUESTION 5
+
+Start
+Open file
+While data is available
+    Read data from file
+End While
+Close file
+Stop
