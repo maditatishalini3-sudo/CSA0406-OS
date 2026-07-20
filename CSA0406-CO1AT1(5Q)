@@ -1,7 +1,0 @@
-Start
-Open file
-While data is available
-    Read data from file
-End While
-Close file
-Stop
