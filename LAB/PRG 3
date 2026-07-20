@@ -1,0 +1,11 @@
+Aim
+To implement the First Come First Served (FCFS) CPU scheduling algorithm using a C program.
+Pseudo Code
+Start
+Input number of processes
+Input burst time for each process
+Set waiting time of first process = 0
+Calculate waiting time for remaining processes
+Calculate turnaround time
+Display waiting time and turnaround time
+Stop
