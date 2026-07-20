@@ -1,0 +1,11 @@
+Aim
+To implement the Shortest Job First (SJF) CPU scheduling algorithm using a C program.
+Pseudo Code
+Start
+Input number of processes
+Input burst time for each process
+Arrange processes in ascending order of burst time
+Calculate waiting time
+Calculate turnaround time
+Display process details
+Stop
