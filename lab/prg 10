@@ -1,0 +1,7 @@
+#include<stdio.h>
+#include<sys/msg.h>
+int main()
+{
+    int id=msgget(1234,0666|IPC_CREAT);
+    printf("Message Queue ID=%d",id);
+}
