@@ -1,0 +1,11 @@
+#include<stdio.h>
+#include<pthread.h>
+pthread_mutex_t m;
+int main()
+{
+    pthread_mutex_init(&m,NULL);
+    pthread_mutex_lock(&m);
+    printf("Critical Section");
+    pthread_mutex_unlock(&m);
+    return 0;
+}
