@@ -1,0 +1,10 @@
+#include<stdio.h>
+int main()
+{
+    int avail=3, need=2;
+    if(avail>=need)
+        printf("Safe State");
+    else
+        printf("Unsafe State");
+    return 0;
+}
