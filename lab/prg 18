@@ -1,0 +1,12 @@
+#include<stdio.h>
+#include<semaphore.h>
+sem_t s;
+int main()
+{
+    sem_init(&s,0,1);
+    sem_wait(&s);
+    printf("Producer\n");
+    printf("Consumer\n");
+    sem_post(&s);
+    return 0;
+}
