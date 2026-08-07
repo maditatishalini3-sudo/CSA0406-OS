@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    int b[5]={100,500,200,300,600};
+    int p[4]={212,417,112,426};
+    int i,j,ch,pos;
+    printf("1.First Fit\n2.Best Fit\n3.Worst Fit\nChoice: ");
+    scanf("%d",&ch);
+    for(i=0;i<4;i++){
+        pos=-1;
+        for(j=0;j<5;j++){
+            if(b[j]>=p[i]){
+                if(ch==1){ pos=j; break; }
+                if(ch==2 && (pos==-1 || b[j]<b[pos])) pos=j;
+                if(ch==3 && (pos==-1 || b[j]>b[pos])) pos=j;
+            }
+        }
+        if(pos!=-1){
+            printf("P%d -> B%d\n",i+1,pos+1);
+            b[pos]-=p[i];
+        }
+        else
+            printf("P%d -> Not Allocated\n",i+1);
+    }
+    return 0;
+}
