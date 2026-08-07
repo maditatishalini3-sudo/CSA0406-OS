@@ -1,0 +1,123 @@
+NAME:M.Naga Shalini
+reg no:192524183
+ csa0406
+1.answer
+  
+#include <stdio.h>
+int main() {
+int base, limit, logical;
+printf("Enter Base Register: ");
+scanf("%d", &base);
+printf("Enter Limit Register: ");
+scanf("%d", &limit);
+printf("Enter Logical Address: ");
+scanf("%d", &logical);
+if (logical < limit)
+printf("Physical Address = %d\n", base + logical);
+else
+printf("Invalid Address\n");
+return 0;
+}
+OUTPUT:
+Enter Base Register: 1000
+Enter Limit Register: 500
+Enter Logical Address: 250
+Physical Address = 1250
+2.answer
+  
+#include <stdio.h>
+int main() {
+int pageSize, pageNo, offset, frame;
+printf("Enter Page Size: ");
+scanf("%d", &pageSize);
+printf("Enter Page Number: ");
+scanf("%d", &pageNo);
+printf("Enter Frame Number: ");
+scanf("%d", &frame);
+printf("Enter Offset: ");
+scanf("%d", &offset);
+printf("Physical Address = %d\n", frame * pageSize + offset);
+return 0;
+}
+OUTPUT:
+Enter Page Size: 1024
+Enter Page Number: 2
+Enter Frame Number: 5
+Enter Offset: 100
+Physical Address = 5220
+3.answer
+  
+#include <stdio.h>
+int main() {
+int pageTable[10], n, page, offset, pageSize;
+printf("Enter Number of Pages: ");
+scanf("%d", &n);
+printf("Enter Frame Numbers:\n");
+for(int i=0;i<n;i++)
+scanf("%d",&pageTable[i]);
+printf("Enter Page Size: ");
+scanf("%d",&pageSize);
+printf("Enter Page Number: ");
+scanf("%d",&page);
+printf("Enter Offset: ");
+scanf("%d",&offset);
+printf("Frame Number = %d\n", pageTable[page]);
+printf("Physical Address = %d\n", pageTable[page]*pageSize+offset);
+return 0;
+}
+OUTPUT:
+Enter Number of Pages: 4
+Enter Frame Numbers:
+3
+5
+1
+7
+Enter Page Size: 1024
+Enter Page Number: 2
+Enter Offset: 50
+Frame Number = 1
+Physical Address = 1074
+4.answer
+  
+#include <stdio.h>
+int main() {
+float hitRatio, tlbTime, memTime, eat;
+printf("Enter TLB Hit Ratio: ");
+scanf("%f",&hitRatio);
+printf("Enter TLB Access Time: ");
+scanf("%f",&tlbTime);
+printf("Enter Memory Access Time: ");
+scanf("%f",&memTime);
+eat = hitRatio*(tlbTime+memTime) +
+(1-hitRatio)*(tlbTime+2*memTime);
+printf("Effective Memory Access Time = %.2f ns\n", eat);
+return 0;
+}
+OUTPUT:
+Enter TLB Hit Ratio: 0.8
+Enter TLB Access Time: 10
+Enter Memory Access Time: 100
+Effective Memory Access Time = 130.00 ns
+5.answer
+  
+#include <stdio.h>
+int main() {
+int base, limit, logical;
+printf("Enter Base Register: ");
+scanf("%d",&base);
+printf("Enter Limit Register: ");
+scanf("%d",&limit);
+printf("Enter Logical Address: ");
+scanf("%d",&logical);
+if(logical>=0 && logical<limit)
+printf("Access Allowed\nPhysical Address = %d\n", base+logical);
+else
+printf("Memory Protection Fault\n");
+return 0;
+}
+OUTPUT:
+Enter Base Register: 500
+Enter Limit Register: 300
+Enter Logical Address: 120
+Access Allowed
+Physical Address = 620  
