@@ -1,0 +1,31 @@
+#include <stdio.h>
+struct Employee
+{
+    int id;
+    char name[20];
+    float salary;
+};
+int main()
+{
+    struct Employee e;
+    FILE *fp;
+    fp = fopen("employee.dat", "wb+");
+    // Input values
+    e.id = 101;
+    sprintf(e.name, "Ravi");
+    e.salary = 25000;
+    fwrite(&e, sizeof(e), 1, fp);
+    e.id = 102;
+    sprintf(e.name, "Priya");
+    e.salary = 30000;
+    fwrite(&e, sizeof(e), 1, fp);
+    // Random access to 2nd employee
+    fseek(fp, sizeof(e), SEEK_SET);
+    fread(&e, sizeof(e), 1, fp);
+    printf("Employee Details\n");
+    printf("ID: %d\n", e.id);
+    printf("Name: %s\n", e.name);
+    printf("Salary: %.2f\n", e.salary);
+    fclose(fp);
+    return 0;
+}
