@@ -1,0 +1,31 @@
+#include <stdio.h>
+int main()
+{
+    FILE *fp;
+    char data[] = "Hello World";
+    char ch;
+    /* Create and write */
+    fp = fopen("file.txt", "w");
+    if (fp == NULL)
+    {
+        printf("File cannot be opened\n");
+        return 0;
+    }
+    fprintf(fp, "%s", data);
+    fclose(fp);
+    /* Open and read */
+    fp = fopen("file.txt", "r");
+    if (fp == NULL)
+    {
+        printf("File cannot be opened\n");
+        return 0;
+    }
+    printf("File Content: ");
+
+    while ((ch = fgetc(fp)) != EOF)
+    {
+        printf("%c", ch);
+    }
+    fclose(fp);
+    return 0;
+}
