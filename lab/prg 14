@@ -1,0 +1,13 @@
+#include <stdio.h>
+int main()
+{
+    char file[5][20];
+    int i;
+    printf("Enter 5 file names:\n");
+    for(i = 0; i < 5; i++)
+        scanf("%s", file[i]);
+    printf("\nFiles in Single Level Directory:\n");
+    for(i = 0; i < 5; i++)
+        printf("%s\n", file[i]);
+    return 0;
+}
