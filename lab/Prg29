@@ -1,0 +1,24 @@
+#include <stdio.h>
+int mutex = 1;
+void wait()
+{
+    while (mutex == 0);
+    mutex = 0;
+}
+void signal()
+{
+    mutex = 1;
+}
+int main()
+{
+    int i;
+    for (i = 1; i <= 3; i++)
+    {
+        printf("\nProcess %d wants to enter", i);
+        wait();
+        printf("\nProcess %d is in critical section", i);
+        printf("\nProcess %d is leaving critical section", i);
+        signal();
+    }
+    return 0;
+}
