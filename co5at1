@@ -1,0 +1,164 @@
+M.Naga Shalini-192524183
+  
+Answer 1 – Linux File System Layout
+The server has 50 GB storage and must manage logs, user files, and application data. Logs must not exceed 10 GB, 
+  and critical services should not stop because of low disk space.
+Simple Partitioning
+Partition	Size	Use
+/boot	1 GB	Boot files
+/	8 GB	Operating system
+/var	7 GB	System/application data
+/var/log	4 GB	Log files
+/home	12 GB	User files
+/opt	6 GB	Applications
+/tmp	2 GB	Temporary files
+swap	4 GB	Virtual memory
+Free space	6 GB	Emergency use
+Total	50 GB	
+Log Rotation
+Use logrotate to control log growth:
+logrotate /etc/logrotate.conf
+It can:
+Rotate logs regularly.
+Compress old logs.
+Delete very old logs.
+Prevent logs from continuously increasing.
+Disk Monitoring
+df -h
+Checks available disk space.
+du -sh /var/log/*
+Checks the size of log files.
+Result
+The separate /var/log partition prevents logs from filling the entire disk. Logrotate + monitoring + reserved
+  free space help keep logs within the required limit and prevent critical services from stopping due to disk exhaustion.
+
+Answer 2 – Kernel-Level Optimization
+The Linux system has high CPU usage and frequent context switching. Hardware cannot be upgraded, so the kernel and scheduler
+should be optimized. The question specifically asks for scheduler tuning and kernel-module techniques.
+Simple Solution
+Tune the CPU scheduler
+The scheduler decides which process gets CPU time. Adjusting scheduler settings can reduce unnecessary context switching.
+Change process priority
+nice -n 10 program
+This runs a CPU-intensive program with lower priority.
+Change priority of a running process
+renice 10 -p PID
+Use CPU affinity
+taskset -c 0,1 program
+This allows the process to use selected CPU cores.
+Use real-time scheduling
+Real-time processes can use scheduling policies such as SCHED_FIFO and SCHED_RR for faster and more predictable processing.
+Manage kernel modules
+lsmod
+modprobe module_name
+modprobe -r module_name
+Unnecessary modules can be removed to reduce resource usage.
+Result
+By tuning the scheduler, adjusting process priorities, using CPU affinity, and managing kernel modules, context-switching 
+  overhead can be reduced and CPU performance improved. Real-time applications can also receive appropriate priority.
+
+Answer3 – Processing 1 Million Log Entries
+The problem requires processing 1 million log entries per day using only shell scripting and completing the task within 2 minutes.
+  The solution should use optimized Linux commands.
+Simple Solution
+Use commands such as awk, grep, sort, uniq, and wc.
+The best choice for large log files is awk because it can process the file in a single pass.
+Example
+To count the total number of log entries:
+wc -l server.log
+To count error messages:
+awk '$2=="ERROR" {count++} END {print count}' server.log
+To count different log levels:
+awk '{count[$2]++} END {
+    for (level in count)
+        print level, count[level]
+}' server.log
+Simple Shell Script
+#!/bin/bash
+LOGFILE="server.log"
+echo "Total entries:"
+wc -l < "$LOGFILE"
+echo "Log statistics:"
+awk '{
+    count[$2]++
+}
+END {
+    for (level in count)
+        print level, count[level]
+}' "$LOGFILE"
+Why awk?
+Processes large files efficiently.
+Reads the file only once.
+Avoids unnecessary loops.
+Reduces process creation.
+Suitable for processing millions of records.
+Result
+Using awk and other optimized Linux commands allows 1 million log entries to be processed efficiently. A single-pass approach 
+reduces processing overhead and helps the script meet the 2-minute requirement, depending on the server hardware and complexity 
+of the log processing.
+
+  Answer 4 – Managing a Faulty High-CPU Process
+The problem states that a faulty process is consuming 90% CPU. The system must not be restarted, and critical services 
+must remain unaffected.
+Simple Solution
+Step 1: Find the CPU-consuming process
+top
+or
+ps aux --sort=-%cpu | head
+These commands show which process is using the most CPU.
+Step 2: Identify its PID
+Example:
+PID    %CPU    COMMAND
+2456   90.0    faulty_app
+Here, 2456 is the process ID.
+Step 3: Monitor the process
+top -p 2456
+Step 4: Reduce its priority
+renice 10 -p 2456
+This allows other important processes to get more CPU time.
+Step 5: Stop the process safely
+First use:
+kill -15 2456
+If it does not stop, use:
+kill -9 2456
+Step 6: Check critical services
+systemctl status service_name
+Make sure critical services are still running.
+Result
+Using top, ps, renice, and kill, the faulty process can be identified, monitored, and controlled without restarting the system.
+  Critical services remain protected while excessive CPU usage is reduced.
+
+  Answer 5 – RAM Allocation for 5 Virtual Machines
+The physical server has 16 GB RAM. It must run 5 virtual machines, each requiring at least 2 GB, while the host
+operating system requires 4 GB.
+Simple Calculation
+RAM required by 5 VMs:
+5 × 2 GB = 10 GB
+RAM required by host OS:
+4 GB
+Total:
+10 GB + 4 GB = 14 GB
+Available RAM:
+16 GB
+Remaining:
+16 GB - 14 GB = 2 GB
+Proposed Allocation
+Resource	RAM
+Host OS	4 GB
+VM 1	2 GB
+VM 2	2 GB
+VM 3	2 GB
+VM 4	2 GB
+VM 5	2 GB
+Reserved RAM	2 GB
+Total	16 GB
+Virtualization Techniques
+1. Memory Ballooning:
+Reclaims unused memory from VMs when required.
+2. Dynamic Allocation:
+RAM can be adjusted according to the workload of each VM.
+3. Memory Monitoring:
+Monitor VM and host memory usage to prevent excessive memory consumption.
+Result
+All 5 VMs receive their required 2 GB, and the host receives 4 GB. The remaining 2 GB is kept as a safety buffer. 
+  Thus, all VMs can operate smoothly within the available 16 GB RAM.
