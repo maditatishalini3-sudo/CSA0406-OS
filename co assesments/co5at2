@@ -1,0 +1,80 @@
+M.NAGA SHALINI-192524183
+
+ANSWER1
+BEGIN
+SET threshold = 80%
+usage = GET_DISK_USAGE()
+IF usage > threshold THEN
+IDENTIFY log_files
+SORT log_files BY size DESCENDING
+FOR each file IN log_files DO
+DELETE or COMPRESS file
+usage = GET_DISK_USAGE()
+IF usage <= threshold THEN
+BREAK
+ENDIF
+ENDFOR
+ENDIF
+PRINT "Disk space managed"
+END 
+  
+ANSWER2
+BEGIN
+INPUT process_list
+SORT process_list BY priority
+WHILE process_list NOT EMPTY DO
+SELECT process WITH highest priority
+ALLOCATE CP
+EXECUTE process
+IF process NOT completed THEN
+REDUCE priority slightly
+ADD process BACK to process_list
+ENDIF
+ENDWHILE
+PRINT "All processes completed"
+END 
+
+ANSWER3
+BEGIN
+SET total_RAM = 16GB
+SET host_reserved = 4GB
+available_RAM = total_RAM - host_reserved
+INPUT number_of_VMs
+SET min_RAM = 2GB
+FOR i = 1 TO number_of_VMs DO
+IF available_RAM >= min_RAM THEN
+ALLOCATE min_RAM TO VM[i]
+available_RAM = available_RAM - min_RAM
+ ELSE
+ PRINT "Insufficient memory"
+ ENDIF
+  ENDFOR
+PRINT "RAM allocation completed"
+END
+  
+  ANSWER4
+BEGIN
+INPUT performance_required
+INPUT budget
+INPUT hardware_access
+IF performance_required = HIGH AND hardware_access = TRUE THEN
+SELECT Type_1_Hypervisor
+ELSE IF budget = LOW THEN
+SELECT Type_2_Hypervisor
+ELSE
+SELECT Type_1_Hypervisor
+ENDIF
+PRINT selected_hypervisor
+END
+
+ANSWER5
+BEGIN
+INPUT application_list
+FOR each app IN application_list DO
+CREATE cgroup for app
+SET CPU limit
+SET memory limit
+ASSIGN process TO cgroup
+ENDFOR
+PRINT "Resource limits applied"
+END
